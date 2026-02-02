@@ -38,6 +38,11 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [ "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera to scan school IDs."
+        }
       ]
     ],
     "experiments": {
