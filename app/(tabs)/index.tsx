@@ -42,6 +42,7 @@ export default function HomeScreen() {
 
       if (bookData) {
         setScannedBook(bookData);
+        console.log(bookData);
       } else {
         Alert.alert('Error', 'Book not found');
       }
