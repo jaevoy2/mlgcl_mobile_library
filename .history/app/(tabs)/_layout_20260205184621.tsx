@@ -26,7 +26,7 @@ export default function TabsLayout() {
                                 <MaterialCommunityIcons
                                     name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
                                     color={focused ? '#3498db' : '#696969'}
-                                    size={focused ? 28 : 32}   
+                                    size={focused ? 28 : 35}   
                                 />
                             </View>
                         )
@@ -48,7 +48,7 @@ export default function TabsLayout() {
                                 <MaterialCommunityIcons
                                     name={focused ? 'bookmark' : 'bookmark-outline'}
                                     color={focused ? '#3498db' : '#696969'}
-                                    size={focused ? 28 : 32}   
+                                    size={focused ? 28 : 35}   
                                 />
                             </View>
                         )

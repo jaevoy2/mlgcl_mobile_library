@@ -4,7 +4,19 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Dimensions, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 
-const { height, width } = Dimensions.get('window')
+const { height, width } = Dimensions.get('window');
+
+type BookProps = {
+    id: number;
+    title: string;
+    subtitle: string;
+    language: string;
+    description: string;
+    publication_year: number;
+    classification: string;
+    status: string;
+
+}
 
 export default function BooksView() {
     const [onSearch, setOnSearch] = useState(false);
@@ -30,7 +42,7 @@ export default function BooksView() {
     }
 
     return (
-        <View>
+        <View style={{ backgroundColor: '#f5f5f5' }}>
             {loading == true ? (
                 <View style={{ width, height, justifyContent: 'center', alignContent: 'center' }}>
                     <ActivityIndicator color={'#3498db'} size={'large'} />
@@ -38,11 +50,8 @@ export default function BooksView() {
             ) : (
                 <>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#3498db', height: 100, width, paddingTop: 40, paddingHorizontal: 20 }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                            <Ionicons name={'person-circle-outline'} size={28} color={'#fff'} />
-                            <Text style={{ fontWeight: '700', fontSize: 16, color: '#fff' }}>Boyet Dedal</Text>
-                        </View>
-                        <Ionicons name={'menu'} size={28} color={'#fff'} />
+                        <Text style={{ fontWeight: '700', fontSize: 16, color: '#fff' }}>Boyet Dedal</Text>
+                        <Ionicons name={'person-circle-outline'} size={28} color={'#fff'} />
                     </View>
                     <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
                         <View style={{ paddingLeft: 8, borderWidth: 1, borderColor: '#afafaf', backgroundColor: '#eeeded', flexDirection: 'row', justifyContent: 'space-between', borderRadius: 50 }}>
