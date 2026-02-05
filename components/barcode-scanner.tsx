@@ -1,7 +1,8 @@
 import {
-    BarcodeScanningResult,
-    CameraView,
-    useCameraPermissions,
+  BarcodeScanningResult,
+  CameraType,
+  CameraView,
+  useCameraPermissions,
 } from "expo-camera";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
@@ -12,11 +13,13 @@ export function BarcodeScanner({
   frameSize,
   onScanned,
   onClose,
+  cameraType = "back", // add cameraType prop with default
 }: {
   instruction: string;
   frameSize: number;
   onScanned: (data: string) => void;
   onClose: () => void;
+  cameraType?: CameraType; // optional
 }) {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
@@ -35,7 +38,7 @@ export function BarcodeScanner({
   return (
     <CameraView
       style={StyleSheet.absoluteFill}
-      facing="back"
+      facing={cameraType} // <-- use cameraType here
       barcodeScannerSettings={{
         barcodeTypes: ["qr", "ean13", "code128"],
       }}

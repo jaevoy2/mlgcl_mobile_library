@@ -4,22 +4,27 @@ import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { Ionicons } from "@expo/vector-icons";
-import { useCameraPermissions } from "expo-camera";
+import { CameraType, useCameraPermissions } from "expo-camera";
 import { useState } from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 
 const { width } = Dimensions.get("window");
-const FRAME_SIZE = width * 0.7; // 70% of screen width
+const FRAME_SIZE = width * 0.8; //80% of screen width
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const [permission, requestPermission] = useCameraPermissions();
   const [isCameraActive, setIsCameraActive] = useState(false);
+  const [cameraType, setCameraType] = useState<CameraType>("back"); // Add state for camera type
 
   const handleScan = () => setIsCameraActive(true);
   const handleCloseCamera = () => setIsCameraActive(false);
 
+  // Toggle between front and back camera
+  const toggleCameraType = () => {
+    setCameraType((prev) => (prev === "back" ? "front" : "back"));
+  };
   // Fetch data from dummyqr array
   const handleScanned = (data: string) => {
     alert(`Scanned Data: ${data}`);
@@ -28,12 +33,29 @@ export default function TabTwoScreen() {
 
   if (isCameraActive) {
     return (
-      <BarcodeScanner
-        instruction="Scan the QR/Barcode on the book to return"
-        frameSize={FRAME_SIZE}
-        onScanned={handleScanned}
-        onClose={handleCloseCamera}
-      />
+      <View style={{ flex: 1 }}>
+        <BarcodeScanner
+          instruction="Scan the QR/Barcode on the book to return"
+          frameSize={FRAME_SIZE}
+          onScanned={handleScanned}
+          onClose={handleCloseCamera}
+          cameraType={cameraType} // Pass cameraType to barcode-scanner.tsx
+        />
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            bottom: 40,
+            right: 30,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: 30,
+            padding: 10,
+            zIndex: 10,
+          }}
+          onPress={toggleCameraType}
+        >
+          <Ionicons name="camera-reverse" size={32} color="#fff" />
+        </TouchableOpacity>
+      </View>
     );
   }
 
